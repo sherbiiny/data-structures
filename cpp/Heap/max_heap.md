@@ -34,24 +34,18 @@ struct max_heap {
         int n = size();
         int i = 0;
 
-        while (i < n) {
-            int l = 2 * i + 1, r = l + 1;
-            if (l < n && r < n) {
-                if (h[l] > h[r] && h[l] > h[i])
-                    swap(h[i], h[l]), i = l;
-                else if (h[r] >= h[l] && h[r] > h[i])
-                    swap(h[r], h[i]), i = r;
-                else break;
-            } else if (l < n && h[l] > h[i]) {
-                swap(h[l], h[i]);
-                i = l;
-            } else if (r < n && h[r] > h[i]) {
-                swap(h[r], h[i]);
-                i = r;
+        while (2 * i + 1 < n) {
+            int j = 2 * i + 1;
+            if (j + 1 < n && h[j + 1] > h[j])
+                j++;
+            if (h[j] > h[i]) {
+                swap(h[j], h[i]);
+                i = j;
             } else break;
         }
 
         return mx;
     }
+};
 };
 ```
